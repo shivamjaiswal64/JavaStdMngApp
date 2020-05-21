@@ -150,6 +150,11 @@ public class manageStudentsForm extends javax.swing.JFrame {
         jLabel8.setText("Id:");
 
         jTextField_FName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTextField_FName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_FNameActionPerformed(evt);
+            }
+        });
 
         jButton_AddStudent.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton_AddStudent.setText("Add");
@@ -350,7 +355,19 @@ public class manageStudentsForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField_PhoneKeyTyped
 
     private void jButtonRemoveStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveStudentActionPerformed
-
+        
+        //whewn we delete  a student we must also delete all score  affected to this student    
+        //we have to add a constraint to score table to do this 
+        // constraint => foreign key + on delete cascade
+        
+        /*
+        ALTER TABLE SCORE 
+        add CONSTRAINT fk_score_student
+        FOREIGN KEY(`student_id`)
+        REFERENCE student (Id)
+        on DELETE CASCADE
+        */
+         
        if(jTextField_STD_ID.getText().equals(""))
         {
           JOptionPane.showMessageDialog(null, "No Student Selected");  
@@ -384,33 +401,39 @@ public class manageStudentsForm extends javax.swing.JFrame {
          }
     
     private void jButton_EditStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EditStudentActionPerformed
-        String fname = jTextField_STD_ID.getText();
+        String fname = jTextField_FName.getText(); // bug of Id , changed with Fname
         String lname = jTextField_LName.getText();
         String phone = jTextField_Phone.getText();
         String address = jTextArea_Address.getText();
         int id = Integer.valueOf(jTextField_STD_ID.getText());
         
-        String sex ="";
+        String sex ="Male";
         if(jRadioButtonFemale.isSelected()){
             sex ="Female";
-        }else if(jRadioButtonFemale.isSelected()){
-            sex ="Male";
         }
+//else if(jRadioButtonFemale.isSelected()){
+//            sex ="Male";
+//        }
         if (verifText()){
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String bdate = dateFormat.format(jDateChooserBirthDate.getDate());
             student std = new student();
             std.insertUpdateDeleteStudent('u', id, fname, lname, sex, bdate, phone, address);
-            MainForm.jLabel_StdCount.setText("Student count = "+Integer.toString(MyFunction.countData("student")));
-                
-            jTextField_STD_ID.setText("");
-            jTextArea_Address.setText("");
-            jTextField_FName.setText("");
-            jTextField_LName.setText("");
-            jTextField_Phone.setText("");
-            jRadioButtonFemale.setSelected(false);
-            jRadioButtonMale.setSelected(false);
-            jDateChooserBirthDate.setDate(null);
+            //MainForm.jLabel_StdCount.setText("Student count = "+Integer.toString(MyFunction.countData("student")));
+              
+            // refresh jtable 
+            manageStudentsForm.jTable.setModel(new DefaultTableModel(null,new Object[]{"Id","First Name","Last Name","Sex","BirthDate","Phone","Address"}));
+            std.fillStudentJtable(manageStudentsForm.jTable, "");
+            
+            
+//            jTextField_STD_ID.setText("");
+//            jTextArea_Address.setText("");
+//            jTextField_FName.setText("");
+//            jTextField_LName.setText("");
+//            jTextField_Phone.setText("");
+//            jRadioButtonFemale.setSelected(false);
+//            jRadioButtonMale.setSelected(false);
+//            jDateChooserBirthDate.setDate(null);
             
             
         }
@@ -426,15 +449,19 @@ public class manageStudentsForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_AddStudentActionPerformed
         int rowIndex;
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
-         rowIndex = jTable.getSelectedRow();
         
+        //get a new model 
+        model = (DefaultTableModel)jTable.getModel();
+        rowIndex = jTable.getSelectedRow();
+            jRadioButtonFemale.setSelected(false);
+            jRadioButtonMale.setSelected(false);  
         if(model.getValueAt(rowIndex, 3).toString().equals("Male"))
         {
          jRadioButtonMale.setSelected(true); 
-         jRadioButtonFemale.setSelected(false);
+         
         }else{
             jRadioButtonFemale.setSelected(true);
-            jRadioButtonMale.setSelected(false);   
+               
         }
             
         jTextField_STD_ID.setText(model.getValueAt(rowIndex, 0).toString());
@@ -501,6 +528,10 @@ public class manageStudentsForm extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jTableKeyReleased
+
+    private void jTextField_FNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_FNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_FNameActionPerformed
 
     /**
      * @param args the command line arguments
