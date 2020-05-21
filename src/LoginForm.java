@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,6 +26,9 @@ public class LoginForm extends javax.swing.JFrame {
         initComponents();
         lbl_U.setVisible(false);
         lbl_p.setVisible(false);
+        
+        // show login form in center screen
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -314,7 +318,7 @@ public class LoginForm extends javax.swing.JFrame {
                     MainForm.jLabel_CrsCount.setText("Course count = "+Integer.toString(MyFunction.countData("course")));
                     this.dispose();
                 }else{
-                    System.out.println("NO");
+                    JOptionPane.showMessageDialog(null, "Incorrect Username or Password!","Login Failed",2);
                 }
                 
             } catch (SQLException ex) {
