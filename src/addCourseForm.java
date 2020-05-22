@@ -146,10 +146,12 @@ public class addCourseForm extends javax.swing.JFrame {
         int hours = Integer.valueOf(jSpinner1.getValue().toString());
         c.insertUpdateDeleteStudent('i', null, label, hours);
         MainForm.jLabel_CrsCount.setText(" Course count = "+Integer.toString(MyFunction.countData("course")));
-        
-        manageCourseForm.jTable1.setModel(new DefaultTableModel(null, new Object[]{"Id","Label","Hours"}));
-        
-        
+        try{
+            manageCourseForm.jTable1.setModel(new DefaultTableModel(null, new Object[]{"Id","Label","Hours"}));
+            c.fillCourseJtable(manageCourseForm.jTable1);
+        }catch(Exception ex){
+            ex.getMessage();
+        }
         }else{
             JOptionPane.showMessageDialog(null, "Course Already Exists");
         }
