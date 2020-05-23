@@ -30,9 +30,6 @@ public class score {
                     JOptionPane.showMessageDialog(null,"Score Added");
                 }
                 
-                
-                
-                
             } catch (SQLException ex) {
                 Logger.getLogger(student.class.getName()).log(Level.SEVERE, null, ex);
             }
