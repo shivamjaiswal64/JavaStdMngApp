@@ -6,13 +6,13 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class editDeleteScore extends javax.swing.JFrame {
-    
     /**
      * Creates new form editDeleteScore
      */
     score sc = new score();
     public editDeleteScore() {
         initComponents();
+
         sc.fillScoreJtable(jTable);
        
         jTable.setShowGrid(true);
@@ -36,6 +36,7 @@ public class editDeleteScore extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+
         jButtonRemoveScore = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jTextField_StudentId = new javax.swing.JTextField();
@@ -63,6 +64,7 @@ public class editDeleteScore extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Score:");
 
+
         jButtonRemoveScore.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButtonRemoveScore.setText("Remove");
         jButtonRemoveScore.addActionListener(new java.awt.event.ActionListener() {
@@ -76,11 +78,13 @@ public class editDeleteScore extends javax.swing.JFrame {
 
         jTextField_StudentId.setEditable(false);
         jTextField_StudentId.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
         jTextField_StudentId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_StudentIdActionPerformed(evt);
             }
         });
+
 
         jButton_EditScore.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton_EditScore.setText("Edit");
@@ -224,6 +228,7 @@ public class editDeleteScore extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void jButtonRemoveScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveScoreActionPerformed
                   
         int sid = Integer.valueOf(jTextField_StudentId.getText()),
@@ -232,7 +237,6 @@ public class editDeleteScore extends javax.swing.JFrame {
         sc.insertUpdateDeleteStudent('d', sid, cid, null, null);
          jTable.setModel(new DefaultTableModel(null, new Object[]{"Student Id","Course Id ","Score","Description"} ));
         sc.fillScoreJtable(jTable);
-        
         //        if(!jTextField_CourseId.getText().equals("")){
             //
             //            int  id = Integer.valueOf(jTextField_CourseId.getText());
@@ -324,6 +328,7 @@ public class editDeleteScore extends javax.swing.JFrame {
                     Addscf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton_AddScoreActionPerformed
 
+
     private void jTextField_StudentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_StudentIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_StudentIdActionPerformed
@@ -364,6 +369,7 @@ public class editDeleteScore extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+
     private javax.swing.JButton jButtonRemoveScore;
     private javax.swing.JButton jButton_AddScore;
     private javax.swing.JButton jButton_EditScore;
