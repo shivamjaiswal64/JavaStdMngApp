@@ -83,6 +83,11 @@ public class AddStudentForm extends javax.swing.JFrame {
         jLabel7.setText("Phone:");
 
         jTextField_FName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTextField_FName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_FNameActionPerformed(evt);
+            }
+        });
 
         jTextField_Phone.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField_Phone.addActionListener(new java.awt.event.ActionListener() {
@@ -269,13 +274,20 @@ public class AddStudentForm extends javax.swing.JFrame {
         student std = new student();
         std.insertUpdateDeleteStudent('i', null, fname, lname, sex, bdate, phone, address);
         MainForm.jLabel_StdCount.setText("Student count = "+Integer.toString(MyFunction.countData("student")));
-        
+        try{
           manageStudentsForm.jTable.setModel(new DefaultTableModel(null,new Object[]{"Id","First Name","Last Name","Sex","BirthDate","Phone","Address"}));
           std.fillStudentJtable(manageStudentsForm.jTable, "");
-        
+        }catch(Exception ex){
+            // if the manage StudentForm  are nor open
+            System.out.println(ex.getMessage());
+        }
         }
         
     }//GEN-LAST:event_jButton_AddStudentActionPerformed
+
+    private void jTextField_FNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_FNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_FNameActionPerformed
 
     /**
      * @param args the command line arguments
