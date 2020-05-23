@@ -56,30 +56,26 @@ public class student {
                 if(ps.executeUpdate()> 0){
                     JOptionPane.showMessageDialog(null,"Student Data Updated");
                 }
-                
-                
-                
-                
             } catch (SQLException ex) {
                 Logger.getLogger(student.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
-     if(operation == 'd'){//d for delete
+    if(operation == 'd'){//d for delete
             
+        int YesOrNo = JOptionPane.showConfirmDialog(null, "The Scores Will Be Also Deleted","Delete Student",JOptionPane.OK_CANCEL_OPTION,0);
+        if(YesOrNo == JOptionPane.OK_OPTION)
+        {          
             try { 
                 ps = con.prepareStatement("DELETE FROM `student` WHERE `id`= ?" );
                 ps.setInt(1,id);
                 
                 if(ps.executeUpdate()> 0){
                     JOptionPane.showMessageDialog(null,"Student Deleted");
-                }
-                
-                
-                
-                
-            } catch (SQLException ex) {
+                }               
+            }catch (SQLException ex) {
                 Logger.getLogger(student.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
     }
     }
     public void fillStudentJtable(JTable table, String valueToSearch)

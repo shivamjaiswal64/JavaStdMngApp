@@ -1,30 +1,21 @@
 
 import java.awt.Color;
+import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author vipin
- */
 public class editDeleteScore extends javax.swing.JFrame {
-
     /**
      * Creates new form editDeleteScore
      */
     score sc = new score();
     public editDeleteScore() {
         initComponents();
-       sc.fillScoreJtable(jTable);
+
+        sc.fillScoreJtable(jTable);
        
-       jTable.setShowGrid(true);
+        jTable.setShowGrid(true);
         jTable.setRowHeight(40);
         jTable.setGridColor(Color.yellow);
         jTable.setSelectionBackground(Color.ORANGE);
@@ -45,7 +36,8 @@ public class editDeleteScore extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButtonCancel = new javax.swing.JButton();
+
+        jButtonRemoveScore = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jTextField_StudentId = new javax.swing.JTextField();
         jButton_EditScore = new javax.swing.JButton();
@@ -72,11 +64,12 @@ public class editDeleteScore extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Score:");
 
-        jButtonCancel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButtonCancel.setText("Remove");
-        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+
+        jButtonRemoveScore.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButtonRemoveScore.setText("Remove");
+        jButtonRemoveScore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelActionPerformed(evt);
+                jButtonRemoveScoreActionPerformed(evt);
             }
         });
 
@@ -85,6 +78,13 @@ public class editDeleteScore extends javax.swing.JFrame {
 
         jTextField_StudentId.setEditable(false);
         jTextField_StudentId.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        jTextField_StudentId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_StudentIdActionPerformed(evt);
+            }
+        });
+
 
         jButton_EditScore.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton_EditScore.setText("Edit");
@@ -165,7 +165,7 @@ public class editDeleteScore extends javax.swing.JFrame {
                         .addGap(155, 155, 155))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addComponent(jButtonCancel)
+                        .addComponent(jButtonRemoveScore)
                         .addGap(64, 64, 64)
                         .addComponent(jButton_EditScore, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(64, 64, 64)
@@ -200,7 +200,7 @@ public class editDeleteScore extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(81, 81, 81)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRemoveScore, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_EditScore, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_AddScore, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(136, 136, 136))
@@ -228,9 +228,15 @@ public class editDeleteScore extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
 
-        this.dispose();
+    private void jButtonRemoveScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveScoreActionPerformed
+                  
+        int sid = Integer.valueOf(jTextField_StudentId.getText()),
+         cid = Integer.valueOf(jTextField_CourseId.getText());
+        
+        sc.insertUpdateDeleteStudent('d', sid, cid, null, null);
+         jTable.setModel(new DefaultTableModel(null, new Object[]{"Student Id","Course Id ","Score","Description"} ));
+        sc.fillScoreJtable(jTable);
         //        if(!jTextField_CourseId.getText().equals("")){
             //
             //            int  id = Integer.valueOf(jTextField_CourseId.getText());
@@ -242,7 +248,7 @@ public class editDeleteScore extends javax.swing.JFrame {
             //            jSpinner1.setValue(4);
             //
             //        }
-    }//GEN-LAST:event_jButtonCancelActionPerformed
+    }//GEN-LAST:event_jButtonRemoveScoreActionPerformed
 
     private void jButton_EditScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EditScoreActionPerformed
 
@@ -322,6 +328,11 @@ public class editDeleteScore extends javax.swing.JFrame {
                     Addscf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton_AddScoreActionPerformed
 
+
+    private void jTextField_StudentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_StudentIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_StudentIdActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -358,7 +369,8 @@ public class editDeleteScore extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCancel;
+
+    private javax.swing.JButton jButtonRemoveScore;
     private javax.swing.JButton jButton_AddScore;
     private javax.swing.JButton jButton_EditScore;
     private javax.swing.JLabel jLabel1;
