@@ -1,18 +1,7 @@
-
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author vipin
- */
 public class addCourseForm extends javax.swing.JFrame {
 
     /**
@@ -163,18 +152,6 @@ public class addCourseForm extends javax.swing.JFrame {
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         this.dispose();
-//        if(jTextField_STD_ID.getText().equals(""))
-//        {
-//            JOptionPane.showMessageDialog(null, "No Student Selected");
-//        }else{
-//
-//            int id = Integer.valueOf(jTextField_STD_ID.getText());
-//            std.insertUpdateDeleteStudent('d', id, null, null, null, null, null, null);
-//            std.fillStudentJtable(jTable, "");
-//            jTable.setModel(new DefaultTableModel(null,new Object[]{"Id","First Name","Last Name","Sex","BirthDate","Phone","Address"}));
-//            std.fillStudentJtable(jTable, jTextField_Val_Find.getText());
-//            MainForm.jLabel_StdCount.setText("Student count = "+Integer.toString(MyFunction.countData("student")));
-//        }
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**
